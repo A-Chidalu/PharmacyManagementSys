@@ -61,12 +61,17 @@ public class Client {
 		return this.email;
 	}
 	
-	public String getClient () {
+	public String getName () {
 		String result = "";
 		result = this.name;
 
 		return result;
 	}
+	
+	public String getID() {
+		return this.ID;
+	}
+	
 	
 	
 	public static Client create(String name) {

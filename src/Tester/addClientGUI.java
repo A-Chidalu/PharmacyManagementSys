@@ -19,7 +19,7 @@ import javax.swing.JComboBox;
 
 public class addClientGUI extends JFrame {
 	private JTextField Cname_Field;
-	private JTextField C;
+	private JTextField Cid_Field;
 	private JTextField Cemail_Field;
 	
 	public static void main(String[] args) {
@@ -58,6 +58,7 @@ public class addClientGUI extends JFrame {
 		getContentPane().add(lblClientName);
 		
 		Cname_Field = new JTextField();
+		Cname_Field.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		Cname_Field.setBounds(338, 94, 320, 36);
 		getContentPane().add(Cname_Field);
 		Cname_Field.setColumns(10);
@@ -67,22 +68,35 @@ public class addClientGUI extends JFrame {
 		lblClientAdderUi.setBounds(240, 13, 228, 47);
 		getContentPane().add(lblClientAdderUi);
 		
-		C = new JTextField();
-		C.setColumns(10);
-		C.setBounds(338, 164, 320, 36);
-		getContentPane().add(C);
+		Cid_Field = new JTextField();
+		Cid_Field.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Cid_Field.setColumns(10);
+		Cid_Field.setEditable(false);
+		Cid_Field.setBounds(338, 164, 320, 36);
+		getContentPane().add(Cid_Field);
+		Cid_Field.setText("ID Automatically Generated on Sumission!");
 		
 		JLabel lblClient = new JLabel("Client ID:");
 		lblClient.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClient.setBounds(98, 152, 228, 57);
 		getContentPane().add(lblClient);
 		
-		JLabel lblClientDrugs = new JLabel("Client Drugs:");
+		JLabel lblClientDrugs = new JLabel("Client Drugs: (Choose 1 or More)");
 		lblClientDrugs.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblClientDrugs.setBounds(98, 244, 228, 57);
+		lblClientDrugs.setBounds(98, 244, 320, 57);
 		getContentPane().add(lblClientDrugs);
 		
-		JComboBox drug_List = new JComboBox();
+		String [] avalibleDrugs = {"Vicodin","Simvastatin","Lisinopril","Advil", "Tylenol","Mr.Vicks"};
+		JComboBox drug_List = new JComboBox(avalibleDrugs);
+		drug_List.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox cb = (JComboBox)arg0.getSource();
+				String selected = (String)cb.getSelectedItem();
+				
+				
+				
+			}
+		});
 		drug_List.setEditable(true);
 		drug_List.setBounds(482, 263, 121, 22);
 		getContentPane().add(drug_List);
@@ -93,6 +107,7 @@ public class addClientGUI extends JFrame {
 		getContentPane().add(lblClientEmail);
 		
 		Cemail_Field = new JTextField();
+		Cemail_Field.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		Cemail_Field.setColumns(10);
 		Cemail_Field.setBounds(338, 353, 320, 36);
 		getContentPane().add(Cemail_Field);
@@ -106,8 +121,8 @@ public class addClientGUI extends JFrame {
 				}
 				else {
 					Client Temp = Client.create(Cname_Field.getText(), Cemail_Field.getText());
-					JOptionPane.showMessageDialog(btnNewButton, "You have sucessfully Created a new Client with" + "\n" + "name: " + Temp.getClient() 
-					+ "\n" + " And email: " + "\n" +  Temp.getEmail());
+					JOptionPane.showMessageDialog(btnNewButton, "Creation of New Client Successful!" + "\n" 
+					+ "Name: " + Temp.getName() + "\n" + "ID: " + Temp.getID() + "\n" + "Email: " + Temp.getEmail());
 				}
 				
 				
