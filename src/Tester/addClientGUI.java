@@ -2,12 +2,15 @@ package Tester;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -16,6 +19,8 @@ import Model.Client;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class addClientGUI extends JFrame {
 	private JTextField Cname_Field;
@@ -86,15 +91,27 @@ public class addClientGUI extends JFrame {
 		lblClientDrugs.setBounds(98, 244, 320, 57);
 		getContentPane().add(lblClientDrugs);
 		
+		 final JTextArea textArea = new JTextArea(5, 15);
 		String [] avalibleDrugs = {"Vicodin","Simvastatin","Lisinopril","Advil", "Tylenol","Mr.Vicks"};
 		JComboBox drug_List = new JComboBox(avalibleDrugs);
+		drug_List.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent event) {
+				Object item = event.getItem();
+				 if (event.getStateChange() == ItemEvent.SELECTED) {
+	                    textArea.setText(item.toString() + " selected.");
+	                }
+
+	                if (event.getStateChange() == ItemEvent.DESELECTED) {
+	                    textArea.setText(item.toString() + " deselected.");
+	                }
+			}
+			
+		});
+		final JList list = new JList(drug_List.getModel());
+		ArrayList<String> selectedItems = new ArrayList<>();
 		drug_List.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JComboBox cb = (JComboBox)arg0.getSource();
-				String selected = (String)cb.getSelectedItem();
-				
-				
-				
+				selectedItems.add((String)drug_List.getSelectedItem());		
 			}
 		});
 		drug_List.setEditable(true);
@@ -116,14 +133,19 @@ public class addClientGUI extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String Drugs = "";
+				for(String s: selectedItems) {
+					Drugs+= s + ",";
+				}
 				if(Cname_Field.getText().isEmpty() || Cemail_Field.getText().isEmpty() ) {
 					JOptionPane.showMessageDialog(btnNewButton, "Please Enter all Information and try again.");
 				}
 				else {
 					Client Temp = Client.create(Cname_Field.getText(), Cemail_Field.getText());
 					JOptionPane.showMessageDialog(btnNewButton, "Creation of New Client Successful!" + "\n" 
-					+ "Name: " + Temp.getName() + "\n" + "ID: " + Temp.getID() + "\n" + "Email: " + Temp.getEmail());
+					+ "Name: " + Temp.getName() + "\n" + "ID: " + Temp.getID() + "\n" + "Email: " + Temp.getEmail() + "\n" + "And Drugs: " + Drugs);
 				}
+				
 				
 				
 			}
