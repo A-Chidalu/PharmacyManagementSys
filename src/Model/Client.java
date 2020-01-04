@@ -3,11 +3,11 @@ package Model;
 import javax.swing.JTextField;
 
 public class Client {
-	String name;
-	Drug[ ] drugs;
+	private String name;
+	private Drug[] drugs;
 	static int id = 300;
-	String ID = "2123" + id++;
-	String email;
+	private String ID = "2123" + id++;
+	private String email;
 	int nod; // number of drugs
 	
 	public Client(String name, String email) {

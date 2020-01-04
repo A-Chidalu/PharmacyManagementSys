@@ -91,22 +91,27 @@ public class addClientGUI extends JFrame {
 		lblClientDrugs.setBounds(98, 244, 320, 57);
 		getContentPane().add(lblClientDrugs);
 		
-		 final JTextArea textArea = new JTextArea(5, 15);
+
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setText("Drugs Going in to the Users Drug Databse:" + "\n");
+		textArea_1.setBounds(800, 236, 300, 65);
+		getContentPane().add(textArea_1);
+		
 		String [] avalibleDrugs = {"Vicodin","Simvastatin","Lisinopril","Advil", "Tylenol","Mr.Vicks"};
-		JComboBox drug_List = new JComboBox(avalibleDrugs);
+		JComboBox<String> drug_List = new JComboBox<>(avalibleDrugs);
 		drug_List.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
 				Object item = event.getItem();
 				 if (event.getStateChange() == ItemEvent.SELECTED) {
-	                    textArea.setText(item.toString() + " selected.");
+					 	textArea_1.setText("Drugs Going in to the Users Drug Databse:" + "\n" + item.toString() + " selected.");
 	                }
 
 	                if (event.getStateChange() == ItemEvent.DESELECTED) {
-	                    textArea.setText(item.toString() + " deselected.");
+	                    textArea_1.setText(item.toString() + " deselected.");
 	                }
 			}
-			
 		});
+		
 		final JList list = new JList(drug_List.getModel());
 		ArrayList<String> selectedItems = new ArrayList<>();
 		drug_List.addActionListener(new ActionListener() {
@@ -152,5 +157,7 @@ public class addClientGUI extends JFrame {
 		});
 		btnNewButton.setBounds(257, 411, 211, 56);
 		getContentPane().add(btnNewButton);
+		
+
 	}
 }
