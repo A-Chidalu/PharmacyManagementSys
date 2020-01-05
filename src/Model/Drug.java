@@ -4,13 +4,19 @@ public class Drug {
 	String name;
 	double price;
 	int quantity;
-	static int id;
-	String ID = "000" + id++;
+	private static int ID = 1;
 	
 	public Drug(String name, double price, int quantity) {
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		Drug.ID++;
+	}
+	
+	public static Drug createDrug(String name, double price, int quantity) {
+		Drug result = new Drug(name, price, quantity);
+		
+		return result;
 	}
 	public Drug() {
 		
@@ -28,9 +34,7 @@ public class Drug {
 	public int getQuantity() {
 		return quantity;
 	}
-	public String getID() {
-		return ID;
-	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -40,9 +44,12 @@ public class Drug {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	
+	public int getID() {
+		return Drug.ID;
 	}
+	
+	
 	
 	
 }

@@ -110,6 +110,17 @@ public class PharmacyGUIMain {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnAddNewDrug = new JButton("Add new Drug");
+		btnAddNewDrug.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addDrugGUI drugWindow = new addDrugGUI();
+				drugWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+				drugWindow.pack();
+				drugWindow.setLocationRelativeTo(null);
+				drugWindow.setVisible(true);
+				drugWindow.setBounds(75, 75, 1000, 600);   
+			}
+		});
 		btnAddNewDrug.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnAddNewDrug.setBounds(768, 544, 389, 97);
 		frame.getContentPane().add(btnAddNewDrug);
