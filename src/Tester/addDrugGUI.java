@@ -14,7 +14,6 @@ public class addDrugGUI extends JFrame {
 	private JTextField drugName_tf;
 	private JTextField drugPrice_tf;
 	private JTextField drugQuantity_tf;
-	private JTextField drugID_tf;
 	
 	public addDrugGUI() {
 		getContentPane().setLayout(null);
@@ -39,11 +38,6 @@ public class addDrugGUI extends JFrame {
 		drugQuantity_lbl.setBounds(70, 203, 136, 34);
 		getContentPane().add(drugQuantity_lbl);
 		
-		JLabel drugID_lbl = new JLabel("Drug ID:");
-		drugID_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		drugID_lbl.setBounds(70, 271, 136, 34);
-		getContentPane().add(drugID_lbl);
-		
 		drugName_tf = new JTextField();
 		drugName_tf.setBounds(175, 73, 203, 37);
 		getContentPane().add(drugName_tf);
@@ -59,21 +53,31 @@ public class addDrugGUI extends JFrame {
 		drugQuantity_tf.setBounds(175, 203, 203, 37);
 		getContentPane().add(drugQuantity_tf);
 		
-		drugID_tf = new JTextField();
-		drugID_tf.setColumns(10);
-		drugID_tf.setBounds(175, 268, 203, 37);
-		getContentPane().add(drugID_tf);
-		
 		JButton submitDrug = new JButton("Submit New Drug!");
 		submitDrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(drugName_tf.getText().isEmpty() || drugPrice_tf.getText().isEmpty() || drugQuantity_tf.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(submitDrug, "Please Enter all Information and try again.");
 				}
+				String dName = drugName_tf.getText();
+				//Casting the user entered price to an int for simplicity
+				
+				int dPrice = (int) Double.parseDouble(drugPrice_tf.getText());
+				int dQuantity = (int) Double.parseDouble(drugQuantity_tf.getText());
+				
+				//Now Create a new Row in the database for this drug
+				int i = AddDrugDBHelper.save(dName, dPrice, dQuantity);
+				if(i > 0) {
+					JOptionPane.showMessageDialog(submitDrug, "Drug Was Successfully Added to The dataBase!");
+				}
+				else {
+					JOptionPane.showMessageDialog(submitDrug, "Sorry, Drug Was not Sucessfully added to database!");
+				}
+				
 			}
 		});
 		submitDrug.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		submitDrug.setBounds(546, 181, 219, 56);
+		submitDrug.setBounds(542, 125, 219, 56);
 		getContentPane().add(submitDrug);
 	}
 

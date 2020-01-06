@@ -106,7 +106,7 @@ public class PharmacyGUIMain {
 		            clientWindow.setBounds(75, 75, 1000, 600);    
 			}
 		});
-		btnNewButton_1.setBounds(96, 544, 389, 97);
+		btnNewButton_1.setBounds(88, 396, 389, 97);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnAddNewDrug = new JButton("Add new Drug");
@@ -122,7 +122,7 @@ public class PharmacyGUIMain {
 			}
 		});
 		btnAddNewDrug.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnAddNewDrug.setBounds(768, 544, 389, 97);
+		btnAddNewDrug.setBounds(768, 396, 389, 97);
 		frame.getContentPane().add(btnAddNewDrug);
 		
 		JLabel lblNewLabel = new JLabel("Pharmacy Master UI");
@@ -130,5 +130,19 @@ public class PharmacyGUIMain {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblNewLabel.setBounds(322, 13, 585, 122);
 		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btn_viewDrugDB = new JButton("View Drug Database");
+		btn_viewDrugDB.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btn_viewDrugDB.setBounds(768, 544, 389, 97);
+		frame.getContentPane().add(btn_viewDrugDB);
+		
+		JButton btn_viewClientDB = new JButton("View Client Database");
+		btn_viewClientDB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btn_viewClientDB.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btn_viewClientDB.setBounds(88, 544, 389, 97);
+		frame.getContentPane().add(btn_viewClientDB);
 	}
 }
