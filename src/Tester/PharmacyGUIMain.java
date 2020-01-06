@@ -132,6 +132,17 @@ public class PharmacyGUIMain {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton btn_viewDrugDB = new JButton("View Drug Database");
+		btn_viewDrugDB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ViewAllDrugsGUI viewer = new ViewAllDrugsGUI();
+				viewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+				viewer.pack();
+				viewer.setLocationRelativeTo(null);
+				viewer.setVisible(true);
+				viewer.setBounds(75, 75, 1000, 600);    
+			}
+		});
 		btn_viewDrugDB.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btn_viewDrugDB.setBounds(768, 544, 389, 97);
 		frame.getContentPane().add(btn_viewDrugDB);
