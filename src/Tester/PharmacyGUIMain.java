@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
@@ -89,6 +90,16 @@ public class PharmacyGUIMain {
 		frame.getContentPane().add(searchDrugField);
 		
 		JButton btnSearchDrug = new JButton("Search Drug");
+		btnSearchDrug.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+				JOptionPane.showMessageDialog(btnSearchDrug, AddDrugDBHelper.getRow(searchDrugField.getText()));
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(btnSearchDrug, "Oops! An Exception Occured: " + e + "Please View the Drug name and spell it correctly");
+				}
+			}
+		});
 		btnSearchDrug.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnSearchDrug.setBounds(989, 307, 218, 44);
 		frame.getContentPane().add(btnSearchDrug);
@@ -136,7 +147,7 @@ public class PharmacyGUIMain {
 		btn_viewDrugDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ViewAllDrugsGUI viewer = new ViewAllDrugsGUI();
-				viewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				viewer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 				viewer.pack();
 				viewer.setLocationRelativeTo(null);

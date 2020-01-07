@@ -18,6 +18,33 @@ public class AddDrugDBHelper {
 		}catch(Exception e){System.out.println(e);}
 		return status;
 	}
+	
+	public static String getRow(String drug_Name) {
+		
+		String result = "";
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM drug_table WHERE drug_Name=?");
+			ps.setString(1, drug_Name);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt("drug_ID");
+				String name =  rs.getString("drug_Name");
+				int price = rs.getInt("drug_Price");
+				int quantity = rs.getInt("drug_Quantity");
+				
+				result = "Drug with ID: " + id + "\n" + "Name: " + name + "\n" + "Price: " + price + "\n" + "Quantity: " + quantity; 
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+		
+		
+	}
 
 
 }

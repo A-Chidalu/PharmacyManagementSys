@@ -113,7 +113,8 @@ public class addDrugGUI extends JFrame {
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PharmacyGUIMain.main(new String[]{});
-				drug_frame.dispose();
+				addDrugGUI.drug_frame = new addDrugGUI();
+				addDrugGUI.drug_frame.dispose();
 
 			}
 		});
