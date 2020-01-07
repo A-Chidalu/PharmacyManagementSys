@@ -27,7 +27,7 @@ public class addClientGUI extends JFrame {
 	private JTextField Cid_Field;
 	private JTextField Cemail_Field;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

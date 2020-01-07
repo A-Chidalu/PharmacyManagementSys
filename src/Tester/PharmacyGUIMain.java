@@ -118,7 +118,8 @@ public class PharmacyGUIMain {
 				drugWindow.pack();
 				drugWindow.setLocationRelativeTo(null);
 				drugWindow.setVisible(true);
-				drugWindow.setBounds(75, 75, 1000, 600);   
+				drugWindow.setBounds(100, 100, 1241, 728);  
+				frame.dispose();
 			}
 		});
 		btnAddNewDrug.setFont(new Font("Tahoma", Font.PLAIN, 30));
