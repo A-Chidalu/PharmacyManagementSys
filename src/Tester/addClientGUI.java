@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -102,21 +103,15 @@ public class addClientGUI extends JFrame {
 		
 		
 		
-		String[] avalibleDrugs = null;
+		List<String> avalibleDrugs = new ArrayList<>();
 		try {
 			Connection con = DB.getConnection();
 			PreparedStatement ps = con.prepareStatement("SELECT drug_Name FROM drug_table");
 			ResultSet rs = ps.executeQuery();
-			
-			rs.last();
-			int rows=rs.getRow();
-			rs.beforeFirst();
-			
-			avalibleDrugs = new String[rows];
-			int counter = 0;
+				
+
 			while(rs.next()) {
-				avalibleDrugs[counter] = rs.getString("drug_name");
-				counter++;
+				avalibleDrugs.add(rs.getString("drug_name"));
 			}
 			con.close();
 		}
@@ -128,7 +123,10 @@ public class addClientGUI extends JFrame {
 		
 		
 		
-		JComboBox<String> drug_List = new JComboBox<>(avalibleDrugs);
+		JComboBox<String> drug_List = new JComboBox<>();
+		for(String s: avalibleDrugs) {
+			drug_List.addItem(s);
+		}
 		drug_List.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
 				Object item = event.getItem();
