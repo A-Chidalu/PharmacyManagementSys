@@ -19,6 +19,7 @@ public class AddDrugDBHelper {
 		return status;
 	}
 	
+	
 	public static String getRow(String drug_Name) {
 		
 		String result = "";

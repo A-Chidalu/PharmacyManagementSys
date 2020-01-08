@@ -20,6 +20,9 @@ import Model.Client;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ItemEvent;
 
 public class addClientGUI extends JFrame {
@@ -97,7 +100,34 @@ public class addClientGUI extends JFrame {
 		textArea_1.setBounds(800, 236, 300, 65);
 		getContentPane().add(textArea_1);
 		
-		String [] avalibleDrugs = {"Vicodin","Simvastatin","Lisinopril","Advil", "Tylenol","Mr.Vicks"};
+		
+		
+		String[] avalibleDrugs = null;
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT drug_Name FROM drug_table");
+			ResultSet rs = ps.executeQuery();
+			
+			rs.last();
+			int rows=rs.getRow();
+			rs.beforeFirst();
+			
+			avalibleDrugs = new String[rows];
+			int counter = 0;
+			while(rs.next()) {
+				avalibleDrugs[counter] = rs.getString("drug_name");
+				counter++;
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		
+		
+		
 		JComboBox<String> drug_List = new JComboBox<>(avalibleDrugs);
 		drug_List.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
@@ -138,19 +168,23 @@ public class addClientGUI extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String Drugs = "";
-				for(String s: selectedItems) {
-					Drugs+= s + ",";
-				}
 				if(Cname_Field.getText().isEmpty() || Cemail_Field.getText().isEmpty() ) {
 					JOptionPane.showMessageDialog(btnNewButton, "Please Enter all Information and try again.");
 				}
-				else {
-					Client Temp = Client.create(Cname_Field.getText(), Cemail_Field.getText());
-					JOptionPane.showMessageDialog(btnNewButton, "Creation of New Client Successful!" + "\n" 
-					+ "Name: " + Temp.getName() + "\n" + "ID: " + Temp.getID() + "\n" + "Email: " + Temp.getEmail() + "\n" + "And Drugs: " + Drugs);
-				}
 				
+				try {
+					Connection con = DB.getConnection();
+					PreparedStatement ps = con.prepareStatement("INSERT INTO drug_table VALUES(?,?,?)");
+					ps.setString(1, Cname_Field.getText());
+					ps.setString(2, Cemail_Field.getText());
+					ps.setInt(3, selectedItems.size());
+					
+					con.close();
+					
+				}
+				catch(Exception ex) {
+					System.out.println(ex);
+				}
 				
 				
 			}
