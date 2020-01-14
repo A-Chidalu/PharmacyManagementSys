@@ -2,6 +2,7 @@ package Tester;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,6 +64,7 @@ public class ViewAllDrugsGUI extends JFrame {
 		
 		
 		table = new JTable(tableData,columns);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		JScrollPane sp=new JScrollPane(table);
 		
 		contentPane.add(sp, BorderLayout.CENTER);
