@@ -42,6 +42,9 @@ public class AddDrugDBHelper {
 			System.out.println(e);
 		}
 		
+		if(result.isEmpty()) {
+			result = "No such drug exists";
+		}
 		return result;
 		
 		

@@ -111,7 +111,7 @@ public class addClientGUI extends JFrame {
 				
 
 			while(rs.next()) {
-				avalibleDrugs.add(rs.getString("drug_name"));
+				avalibleDrugs.add(rs.getString("drug_Name"));
 			}
 			con.close();
 		}
@@ -169,18 +169,40 @@ public class addClientGUI extends JFrame {
 				if(Cname_Field.getText().isEmpty() || Cemail_Field.getText().isEmpty() ) {
 					JOptionPane.showMessageDialog(btnNewButton, "Please Enter all Information and try again.");
 				}
+				if(selectedItems.size() == 0) {
+					JOptionPane.showMessageDialog(btnNewButton, "Please Select Drugs for this client and try again.");
+				}
 				
 				try {
 					Connection con = DB.getConnection();
-					PreparedStatement ps = con.prepareStatement("INSERT INTO drug_table VALUES(?,?,?)");
-					ps.setString(1, Cname_Field.getText());
-					ps.setString(2, Cemail_Field.getText());
-					ps.setInt(3, selectedItems.size());
+					int i = AddClientDBHelper.save(Cname_Field.getText(), Cemail_Field.getText(), selectedItems.size());
+					if(i > 0) {
+						JOptionPane.showMessageDialog(btnNewButton, "Client Was Successfully Added to The dataBase!");
+					}
+					else {
+						JOptionPane.showMessageDialog(btnNewButton, "Sorry, Client Was not Sucessfully added to database!");
+					}
+					
+					PreparedStatement ps1 = con.prepareStatement("SELECT * FROM client_table WHERE client_ID=(SELECT max(client_ID) FROM client_table)");
+					ResultSet rs = ps1.executeQuery();
+					
+					rs.next(); //Crusor always starts before the first row therefore you have to move it
+					int clientID = rs.getInt(1);
+					
+					int j = AddClientDBHelper.saveDrugs(selectedItems, clientID);
+					if(j >= selectedItems.size()) {
+						JOptionPane.showMessageDialog(btnNewButton, "All Client-Drugs were Successfully Added to client_drug_db");
+					}
+					else {
+						JOptionPane.showMessageDialog(btnNewButton, "Sorry, Client-drugs were not Sucessfully added to database!");
+					}
+					
 					
 					con.close();
-					
+					System.out.println("Success, Everything has been added to the database!");
 				}
 				catch(Exception ex) {
+					ex.printStackTrace();
 					System.out.println(ex);
 				}
 				

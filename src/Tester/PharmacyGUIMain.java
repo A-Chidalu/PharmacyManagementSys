@@ -51,75 +51,78 @@ public class PharmacyGUIMain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1318, 719);     
+		frame.setBounds(100, 100, 1318, 719);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblClientSearch = new JLabel("Client Search");
 		lblClientSearch.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblClientSearch.setBounds(175, 186, 289, 97);
 		frame.getContentPane().add(lblClientSearch);
-		
+
 		JLabel lblDrugSearch = new JLabel("Drug Search");
 		lblDrugSearch.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblDrugSearch.setBounds(868, 186, 289, 97);
 		frame.getContentPane().add(lblDrugSearch);
-		
+
 		searchClientField = new JTextField();
 		searchClientField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		searchClientField.setBounds(40, 312, 247, 44);
 		frame.getContentPane().add(searchClientField);
 		searchClientField.setColumns(10);
-		
+
 		JButton btnNewButton = new JButton("Search Client");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-
-				
+				try {
+					JOptionPane.showMessageDialog(btnNewButton, AddClientDBHelper.getRow(searchClientField.getText()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(btnNewButton,
+							"Oops! An Exception Occured: " + e + "Please View the Drug name and spell it correctly");
+				}
 			}
 		});
 		btnNewButton.setBounds(322, 307, 218, 44);
 		frame.getContentPane().add(btnNewButton);
-		
+
 		searchDrugField = new JTextField();
 		searchDrugField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		searchDrugField.setColumns(10);
 		searchDrugField.setBounds(690, 312, 247, 44);
 		frame.getContentPane().add(searchDrugField);
-		
+
 		JButton btnSearchDrug = new JButton("Search Drug");
 		btnSearchDrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				JOptionPane.showMessageDialog(btnSearchDrug, AddDrugDBHelper.getRow(searchDrugField.getText()));
-				}
-				catch(Exception e) {
-					JOptionPane.showMessageDialog(btnSearchDrug, "Oops! An Exception Occured: " + e + "Please View the Drug name and spell it correctly");
+					JOptionPane.showMessageDialog(btnSearchDrug, AddDrugDBHelper.getRow(searchDrugField.getText()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(btnSearchDrug,
+							"Oops! An Exception Occured: " + e + "Please View the Drug name and spell it correctly");
 				}
 			}
 		});
 		btnSearchDrug.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnSearchDrug.setBounds(989, 307, 218, 44);
 		frame.getContentPane().add(btnSearchDrug);
-		
+
 		JButton btnNewButton_1 = new JButton("Add new Client");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addClientGUI clientWindow = new addClientGUI();
-				 clientWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				clientWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		            clientWindow.pack();
-		            clientWindow.setLocationRelativeTo(null);
-		            clientWindow.setVisible(true);
-		            clientWindow.setBounds(75, 75, 1000, 600);    
+				clientWindow.pack();
+				clientWindow.setLocationRelativeTo(null);
+				clientWindow.setVisible(true);
+				clientWindow.setBounds(75, 75, 1000, 600);
 			}
 		});
 		btnNewButton_1.setBounds(88, 396, 389, 97);
 		frame.getContentPane().add(btnNewButton_1);
-		
+
 		JButton btnAddNewDrug = new JButton("Add new Drug");
 		btnAddNewDrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,20 +132,20 @@ public class PharmacyGUIMain {
 				drugWindow.pack();
 				drugWindow.setLocationRelativeTo(null);
 				drugWindow.setVisible(true);
-				drugWindow.setBounds(100, 100, 1241, 728);  
+				drugWindow.setBounds(100, 100, 1241, 728);
 				frame.dispose();
 			}
 		});
 		btnAddNewDrug.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnAddNewDrug.setBounds(768, 396, 389, 97);
 		frame.getContentPane().add(btnAddNewDrug);
-		
+
 		JLabel lblNewLabel = new JLabel("Pharmacy Master UI");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblNewLabel.setBounds(322, 13, 585, 122);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		JButton btn_viewDrugDB = new JButton("View Drug Database");
 		btn_viewDrugDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -152,13 +155,13 @@ public class PharmacyGUIMain {
 				viewer.pack();
 				viewer.setLocationRelativeTo(null);
 				viewer.setVisible(true);
-				viewer.setBounds(75, 75, 1000, 600);    
+				viewer.setBounds(75, 75, 1000, 600);
 			}
 		});
 		btn_viewDrugDB.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btn_viewDrugDB.setBounds(768, 544, 389, 97);
 		frame.getContentPane().add(btn_viewDrugDB);
-		
+
 		JButton btn_viewClientDB = new JButton("View Client Database");
 		btn_viewClientDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
