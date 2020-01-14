@@ -4,5 +4,3 @@ A Practical GUI to manage a pharmacy company. Uses a MySQL database in the backe
 ![mainGUIPic](https://github.com/A-Chidalu/PharmacyManagementSys/blob/master/mainGUIPic.PNG)
 ![addNewDrugGUI](https://github.com/A-Chidalu/PharmacyManagementSys/blob/master/addNewDrugGUI.PNG)
 
-## >>>>>>>>Project Still In Progress<<<<<<<<
-
