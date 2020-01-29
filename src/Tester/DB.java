@@ -3,6 +3,11 @@ package Tester;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * A Class that makes the connection to the Database, hiding Username and Password
+ * @author Chidalu Agbalwa
+ *
+ */
 public class DB {
 	public static Connection getConnection() {
 		Connection con = null;

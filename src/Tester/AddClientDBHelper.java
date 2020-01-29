@@ -5,6 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+/**
+ * This Class provides Helper methods to preform CRUD Operations in the Drug Database
+ * @author Chidalu Agbalwa
+ *
+ */
 public class AddClientDBHelper {
 	
 	
