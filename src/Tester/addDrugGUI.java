@@ -57,7 +57,7 @@ public class addDrugGUI extends JFrame {
 		drugName_lbl.setBounds(68, 110, 234, 59);
 		getContentPane().add(drugName_lbl);
 		
-		JLabel drugPrice_lbl = new JLabel("Drug Price:");
+		JLabel drugPrice_lbl = new JLabel("Drug Price($):");
 		drugPrice_lbl.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		drugPrice_lbl.setBounds(70, 199, 236, 59);
 		getContentPane().add(drugPrice_lbl);
